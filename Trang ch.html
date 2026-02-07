@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moodoo - Hành trình cảm xúc</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- CÀI ĐẶT CHUNG --- */
+        :root {
+            --color-yellow: #fecb46;
+            --color-green: #8bc34a;
+            --color-orange: #ff9800;
+            --color-pink: #f48fb1;
+            --color-blue: #81d4fa;
+            --color-footer: #ff6f00;
+            --text-dark: #333;
+            --nav-bg: #ffb74d; /* Màu nền cho thanh menu */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Fredoka', sans-serif;
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section-padding {
+            padding: 60px 0;
+        }
+
+        h1, h2, h3 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        /* --- THANH ĐIỀU HƯỚNG (MENU) MỚI THÊM --- */
+        .top-nav {
+            background-color: var(--nav-bg); /* Màu cam nhạt hơn header chút */
+            padding: 15px 0;
+            border-bottom: 2px solid rgba(255,255,255,0.2);
+        }
+
+        .nav-list {
+            list-style: none;
+            display: flex;
+            justify-content: center; /* Canh giữa menu */
+            gap: 30px; /* Khoảng cách giữa các chữ */
+            flex-wrap: wrap;
+        }
+
+        .nav-list li a {
+            text-decoration: none;
+            color: #d84315; /* Màu chữ nâu đỏ */
+            font-weight: 700;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            transition: color 0.3s;
+        }
+
+        .nav-list li a:hover {
+            color: white; /* Rê chuột vào đổi màu trắng */
+        }
+
+        /* --- HEADER --- */
+        header {
+            background-color: var(--color-yellow);
+            padding-top: 20px;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+            padding-bottom: 50px;
+        }
+
+        .logo-text {
+            font-size: 5rem;
+            font-weight: 900;
+            letter-spacing: 5px;
+            margin-bottom: 10px;
+            margin-top: 20px;
+        }
+        /* Tạo màu từng chữ cái cho chữ MOODOO */
+        .logo-text span:nth-child(1) { color: #e91e63; }
+        .logo-text span:nth-child(2) { color: #2196f3; }
+        .logo-text span:nth-child(3) { color: #ffeb3b; }
+        .logo-text span:nth-child(4) { color: #4caf50; }
+        .logo-text span:nth-child(5) { color: #ff9800; }
+        .logo-text span:nth-child(6) { color: #9c27b0; }
+
+        .slogan {
+            font-size: 1.5rem;
+            color: #d84315;
+            font-style: italic;
+        }
+
+        .mascot-hero {
+            width: 300px;
+            margin: 20px auto 0;
+            /* Placeholder cho con nhím ló đầu lên */
+            border-radius: 50% 50% 0 0;
+            height: auto; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* --- SECTION: GIỚI THIỆU (XANH LÁ) --- */
+        .intro-section {
+            background-color: var(--color-green);
+            color: white;
+        }
+
+        .intro-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .intro-image, .intro-text {
+            flex: 1;
+        }
+
+        .intro-image .placeholder-img {
+            background-color: #fff;
+            height: 300px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #333;
+        }
+
+        .intro-text h2 {
+            text-align: left;
+            font-size: 2.5rem;
+        }
+        
+        .intro-text h2 span { color: var(--color-yellow); }
+
+        /* --- SECTION: BỘ SÁCH (VÀNG NHẠT) --- */
+        .products-section {
+            background-color: #fdf5e6;
+        }
+        
+        .products-title {
+            color: #333;
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+        }
+
+        .products-grid {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+        }
+
+        .product-card {
+            text-align: center;
+        }
+
+        .book-cover {
+            width: 300px;
+            height: 300px;
+            background-color: #ddd; /* Chỗ để ảnh bìa sách */
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #555;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            object-fit: cover; /* Để ảnh không bị méo */
+        }
+        
+        .book-blue { background-color: #b3e5fc; }
+        .book-pink { background-color: #f8bbd0; }
+
+        .product-name {
+            font-weight: 700;
+            color: #d84315;
+            font-size: 1.2rem;
+        }
+
+        /* --- SECTION: WHY MOODOO (CAM) --- */
+        .features-section {
+            background-color: var(--color-orange);
+            color: #333;
+        }
+
+        .features-header {
+            font-size: 3rem;
+            color: #0d47a1;
+            margin-bottom: 40px;
+        }
+        
+        .features-header span { color: #d32f2f; font-style: italic;}
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .feature-card {
+            background: linear-gradient(135deg, rgba(255,255,255,0.8), rgba(255,255,255,0.4));
+            padding: 20px;
+            border-radius: 15px;
+            min-height: 150px;
+        }
+
+        .feature-card h4 {
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        /* --- SECTION: OUR TEAM (XANH DƯƠNG) --- */
+        .team-section {
+            background-color: var(--color-blue);
+        }
+
+        .team-title {
+            color: white;
+            font-size: 3rem;
+            margin-bottom: 40px;
+        }
+
+        .team-grid {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        .team-member {
+            text-align: center;
+            width: 150px;
+        }
+
+        .team-avatar {
+            width: 100px;
+            height: 100px;
+            background-color: #fff;
+            border-radius: 50%;
+            margin: 0 auto 10px;
+            overflow: hidden;
+        }
+        
+        .team-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .team-name { font-weight: bold; }
+        .team-role { font-size: 0.9rem; color: #555; }
+
+        /* --- SECTION: ĐẾN VỚI MOODOO (HỒNG) --- */
+        .about-section {
+            background-color: var(--color-pink);
+        }
+
+        .about-container {
+            display: flex;
+            gap: 40px;
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 20px;
+            padding: 20px;
+        }
+
+        .about-text {
+            flex: 1;
+            color: white;
+            padding: 20px;
+        }
+        
+        .about-text h2 { text-align: left; font-style: italic; font-size: 2.5rem; margin-bottom: 20px;}
+        .about-text h2 span { color: #3f51b5; }
+
+        .about-image {
+            flex: 1;
+            background-color: #ddd;
+            min-height: 300px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .about-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background-color: var(--color-footer);
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        .footer-mascot {
+            width: 100px;
+            height: 100px;
+            background-color: #fff;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #333;
+            overflow: hidden;
+        }
+        
+        .footer-mascot img {
+            width: 80%;
+        }
+
+        .footer-links {
+            margin-top: 20px;
+        }
+        
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+            border: 1px solid white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+
+        /* --- MOBILE RESPONSIVE --- */
+        @media (max-width: 768px) {
+            .intro-content, .products-grid, .about-container {
+                flex-direction: column;
+            }
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            .logo-text { font-size: 3rem; }
+            .nav-list { flex-direction: column; gap: 10px; padding-bottom: 10px;}
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="top-nav">
+        <div class="container">
+            <ul class="nav-list">
+                <li><a href="#">Trang chủ</a></li>
+                <li><a href="#">Giới thiệu</a></li>
+                <li><a href="#">Sản phẩm</a></li>
+                <li><a href="#">Thư viện</a></li>
+                <li><a href="#">Blog</a></li>
+                <li><a href="#">Tuyển dụng</a></li>
+                <li><a href="#">Liên hệ</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header>
+        <div class="container">
+            <div class="logo-text">
+                <span>M</span><span>O</span><span>O</span><span>D</span><span>O</span><span>O</span>
+            </div>
+            <p class="slogan">"HÀNH TRÌNH KHÁM PHÁ CẢM XÚC CÙNG TRẺ"</p>
+            <div class="mascot-hero">
+                <img src="https://via.placeholder.com/300x150.png?text=Hinh+Nhim+Cua+Ban" alt="Nhím Moodoo">
+            </div>
+        </div>
+    </header>
+
+    <section class="section-padding intro-section">
+        <div class="container intro-content">
+            <div class="intro-image">
+                <div class="placeholder-img">
+                     [Ảnh/Video Giới thiệu]
+                </div>
+            </div>
+            <div class="intro-text">
+                <h2>Câu chuyện về <span>MOODOO</span></h2>
+                <p>Một buổi sáng, Moodoo tìm thấy một phong bì rất đẹp trước cửa nhà. Trên có ghi: "Gửi Moodoo yêu dấu của ta..."</p>
+                <br>
+                <p>Moodoo rất háo hức, cậu nhận ra tấm vé thông hành diệu kỳ. Nó cho phép cậu khám phá một hành trình đầy màu sắc...</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padding products-section">
+        <div class="container">
+            <h2 class="products-title">BỘ SÁCH <span style="color:#e91e63">MOODOO</span></h2>
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="book-cover book-blue">[Ảnh Bìa Sách 1]</div>
+                    <p class="product-name">VÙNG ĐẤT CẢM XÚC I</p>
+                    <p>Vui - Buồn - Ngạc Nhiên</p>
+                </div>
+                <div class="product-card">
+                    <div class="book-cover book-pink">[Ảnh Bìa Sách 2]</div>
+                    <p class="product-name">VÙNG ĐẤT CẢM XÚC II</p>
+                    <p>Giận - Sợ - Yêu Thương</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padding features-section">
+        <div class="container">
+            <h2 class="features-header">Why <span>MOODOO?</span></h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h4>Gần gũi tự nhiên</h4>
+                    <p>Hình ảnh minh họa lấy cảm hứng từ thiên nhiên...</p>
+                </div>
+                <div class="feature-card">
+                    <h4>Gần gũi cảm xúc</h4>
+                    <p>Các nhân vật được xây dựng dựa trên...</p>
+                </div>
+                <div class="feature-card">
+                    <h4>Sử dụng linh hoạt</h4>
+                    <p>Tài liệu hướng dẫn giúp phụ huynh...</p>
+                </div>
+                <div class="feature-card">
+                    <h4>An toàn và riêng tư</h4>
+                    <p>Cam kết bảo mật thông tin...</p>
+                </div>
+                <div class="feature-card">
+                    <h4>Thân thiện & dễ hiểu</h4>
+                    <p>Nội dung đơn giản, phù hợp lứa tuổi...</p>
+                </div>
+                <div class="feature-card">
+                    <h4>Tối ưu thời gian</h4>
+                    <p>Không cần chuẩn bị cầu kỳ...</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padding team-section">
+        <div class="container">
+            <h2 class="team-title">OUR TEAM</h2>
+            <div class="team-grid">
+                <div class="team-member">
+                    <div class="team-avatar"><img src="https://via.placeholder.com/100" alt="Team"></div>
+                    <p class="team-name">Khánh Quỳnh</p>
+                    <p class="team-role">Co-Founder</p>
+                </div>
+                <div class="team-member">
+                    <div class="team-avatar"><img src="https://via.placeholder.com/100" alt="Team"></div>
+                    <p class="team-name">Bích Trâm</p>
+                    <p class="team-role">Co-Founder</p>
+                </div>
+                <div class="team-member">
+                    <div class="team-avatar"><img src="https://via.placeholder.com/100" alt="Team"></div>
+                    <p class="team-name">Tuấn Anh</p>
+                    <p class="team-role">Head of Product</p>
+                </div>
+                 <div class="team-member">
+                    <div class="team-avatar"><img src="https://via.placeholder.com/100" alt="Team"></div>
+                    <p class="team-name">Anh Thư</p>
+                    <p class="team-role">Head of Marketing</p>
+                </div>
+                 <div class="team-member">
+                    <div class="team-avatar"><img src="https://via.placeholder.com/100" alt="Team"></div>
+                    <p class="team-name">Gia Khánh</p>
+                    <p class="team-role">Head of Digital</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padding about-section">
+        <div class="container">
+            <div class="about-container">
+                <div class="about-text">
+                    <h2>Đến với <span>MOODOO.</span></h2>
+                    <p>Trẻ sẽ được khám phá và thấu hiểu cảm xúc của mình qua những câu chuyện sinh động và trò chơi tương tác...</p>
+                </div>
+                <div class="about-image">
+                    [Ảnh Hoạt Động]
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-mascot">
+                [Logo]
+            </div>
+            <h2>MOODOO</h2>
+            <p>Hành trình khám phá cảm xúc</p>
+            <div class="footer-links">
+                <a href="#">Trang chủ</a>
+                <a href="#">Giới thiệu</a>
+                <a href="#">Sản phẩm</a>
+                <a href="#">Blog</a>
+            </div>
+            <p style="margin-top: 20px; font-size: 0.8rem;">© 2024 MOODOO. All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
